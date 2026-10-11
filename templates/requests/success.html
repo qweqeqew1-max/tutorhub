@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title %}Заявка отправлена — TutorHub{% endblock %}
+
+{% block content %}
+<section class="section">
+    <div class="container success-block">
+        <h1>✅ Заявка отправлена!</h1>
+        <p>Мы свяжемся с вами в ближайшее время</p>
+        <a href="{% url 'pages:index' %}" class="btn btn-primary">На главную</a>
+    </div>
+</section>
+{% endblock %}

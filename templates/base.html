@@ -1,0 +1,61 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}TutorHub — Поиск репетиторов{% endblock %}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Manrope:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+
+<header class="header">
+    <div class="container header-inner">
+        <a href="{% url 'pages:index' %}" class="logo">Tutor<span>Hub</span></a>
+        <nav class="nav">
+            <a href="{% url 'pages:index' %}">Главная</a>
+            <a href="{% url 'tutors:list' %}">Репетиторы</a>
+            <a href="{% url 'subjects:list' %}">Предметы</a>
+            <a href="{% url 'pages:about' %}">О нас</a>
+            <a href="{% url 'pages:contacts' %}">Контакты</a>
+        </nav>
+        <div class="header-actions">
+            <a href="tel:+79999999999" class="phone"><i class="fas fa-phone"></i> +7 999 999 99 99</a>
+            <a href="{% url 'requests:create' %}" class="btn btn-primary">Оставить заявку</a>
+        </div>
+    </div>
+</header>
+
+<main>
+    {% block content %}{% endblock %}
+</main>
+
+<footer class="footer">
+    <div class="container footer-inner">
+        <div>
+            <h4>TutorHub</h4>
+            <p>Платформа для поиска репетиторов по всем предметам</p>
+        </div>
+        <div>
+            <h4>Меню</h4>
+            <a href="{% url 'pages:index' %}">Главная</a>
+            <a href="{% url 'tutors:list' %}">Репетиторы</a>
+            <a href="{% url 'subjects:list' %}">Предметы</a>
+        </div>
+        <div>
+            <h4>Контакты</h4>
+            <p><i class="fas fa-envelope"></i> info@tutorhub.ru</p>
+            <p><i class="fas fa-phone"></i> +7 999 999 99 99</p>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>© 2026 TutorHub. Все права защищены.</p>
+    </div>
+</footer>
+
+{% block extra_js %}{% endblock %}
+</body>
+</html>

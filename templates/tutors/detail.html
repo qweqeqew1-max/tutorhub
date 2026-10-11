@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ tutor.name }} — TutorHub{% endblock %}
+
+{% block content %}
+<section class="section">
+    <div class="container">
+        <div class="tutor-detail">
+            <div class="tutor-detail-photo">
+                {% if tutor.photo %}
+                <img src="{{ tutor.photo.url }}" alt="{{ tutor.name }}">
+                {% endif %}
+            </div>
+            <div class="tutor-detail-info">
+                <h1>{{ tutor.name }}</h1>
+                <p class="subject">{{ tutor.subject.name }}</p>
+                <p class="experience">Опыт: {{ tutor.experience }} лет</p>
+                <p class="price">{{ tutor.price }} ₽ / час</p>
+                <p class="description">{{ tutor.description }}</p>
+                <a href="{% url 'requests:create' %}" class="btn btn-primary">Оставить заявку</a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}Предметы — TutorHub{% endblock %}
+
+{% block content %}
+<section class="section">
+    <div class="container">
+        <h1>Предметы</h1>
+        <div class="grid-4">
+            {% for subject in subjects %}
+            <a href="{% url 'tutors:list' %}?subject={{ subject.slug }}" class="card subject-card">
+                <h3>{{ subject.name }}</h3>
+                <p>Репетиторов: {{ subject.tutors.count }}</p>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}TutorHub — Главная{% endblock %}
+
+{% block content %}
+
+<section class="hero">
+    <div class="container">
+        <h1>Найди своего идеального репетитора</h1>
+        <p>Более 500 проверенных преподавателей по всем предметам</p>
+        <a href="{% url 'tutors:list' %}" class="btn btn-primary btn-lg">Найти репетитора</a>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <h2>Популярные репетиторы</h2>
+        <div class="grid-3">
+            {% for tutor in tutors %}
+            <div class="card tutor-card">
+                {% if tutor.photo %}
+                <img src="{{ tutor.photo.url }}" alt="{{ tutor.name }}">
+                {% endif %}
+                <h3>{{ tutor.name }}</h3>
+                <p class="subject">{{ tutor.subject.name }}</p>
+                <p class="price">{{ tutor.price }} ₽ / час</p>
+                <a href="{% url 'tutors:detail' tutor.pk %}" class="btn btn-outline">Подробнее</a>
+            </div>
+            {% empty %}
+            <p>Репетиторы скоро появятся</p>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="section section-cta">
+    <div class="container">
+        <h2>Не знаешь, кого выбрать?</h2>
+        <p>Оставь заявку — мы подберём репетитора под твои задачи</p>
+        <a href="{% url 'requests:create' %}" class="btn btn-primary btn-lg">Оставить заявку</a>
+    </div>
+</section>
+
+{% endblock %}

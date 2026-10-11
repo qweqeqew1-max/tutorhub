@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Репетиторы — TutorHub{% endblock %}
+
+{% block content %}
+<section class="section">
+    <div class="container">
+        <h1>Репетиторы</h1>
+
+        <div class="filters">
+            <a href="{% url 'tutors:list' %}" class="filter {% if not selected_subject %}active{% endif %}">Все</a>
+            {% for subject in subjects %}
+            <a href="?subject={{ subject.slug }}" class="filter {% if selected_subject == subject.slug %}active{% endif %}">{{ subject.name }}</a>
+            {% endfor %}
+        </div>
+
+        <div class="grid-3">
+            {% for tutor in tutors %}
+            <div class="card tutor-card">
+                {% if tutor.photo %}
+                <img src="{{ tutor.photo.url }}" alt="{{ tutor.name }}">
+                {% endif %}
+                <h3>{{ tutor.name }}</h3>
+                <p class="subject">{{ tutor.subject.name }}</p>
+                <p class="experience">Опыт: {{ tutor.experience }} лет</p>
+                <p class="price">{{ tutor.price }} ₽ / час</p>
+                <a href="{% url 'tutors:detail' tutor.pk %}" class="btn btn-outline">Подробнее</a>
+            </div>
+            {% empty %}
+            <p>Репетиторы не найдены</p>
+            {% endfor %}
+        </div>
+
+        {% if tutors.has_other_pages %}
+        <div class="pagination">
+            {% if tutors.has_previous %}
+            <a href="?page={{ tutors.previous_page_number }}{% if selected_subject %}&subject={{ selected_subject }}{% endif %}" class="page-btn">‹</a>
+            {% endif %}
+            <span class="page-info">{{ tutors.number }} / {{ tutors.paginator.num_pages }}</span>
+            {% if tutors.has_next %}
+            <a href="?page={{ tutors.next_page_number }}{% if selected_subject %}&subject={{ selected_subject }}{% endif %}" class="page-btn">›</a>
+            {% endif %}
+        </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}Оставить заявку — TutorHub{% endblock %}
+
+{% block content %}
+<section class="section">
+    <div class="container form-container">
+        <h1>Оставить заявку</h1>
+        <form method="post">
+            {% csrf_token %}
+            <label>Имя</label>
+            <input type="text" name="name" required>
+
+            <label>Телефон</label>
+            <input type="tel" name="phone" required>
+
+            <label>Email</label>
+            <input type="email" name="email" required>
+
+            <label>Предмет</label>
+            <select name="subject" required>
+                {% for subject in subjects %}
+                <option value="{{ subject.id }}">{{ subject.name }}</option>
+                {% endfor %}
+            </select>
+
+            <label>Репетитор (необязательно)</label>
+            <select name="tutor">
+                <option value="">Любой</option>
+                {% for tutor in tutors %}
+                <option value="{{ tutor.id }}">{{ tutor.name }}</option>
+                {% endfor %}
+            </select>
+
+            <label>Дата занятия</label>
+            <input type="date" name="date" required>
+
+            <button type="submit" class="btn btn-primary btn-lg">Отправить</button>
+        </form>
+    </div>
+</section>
+{% endblock %}
